@@ -3338,13 +3338,18 @@ button.torches:hover::after {
   border: 1px solid #000;
   display: grid;
   grid-area: dice-base;
-  grid-template-areas: "dice-base-header dice-base-header" "dice-base-col1 dice-base-col2" "dice-base-col1 dice-base-col2" "dice-base-col1 dice-base-col2" "dice-base-col1 dice-base-col2" "dice-base-col1 dice-base-col2" "dice-base-col1 dice-base-col2" "dice-base-col1 dice-base-col2";
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2.5em 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "dice-base-header" "dice-base-body";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1em 1fr;
   justify-items: center;
   margin: 2px 0 0 0;
-  padding: 2px 2px 0 2px;
+  padding: 2px;
   text-align: center;
+}
+
+.ui-dialog .charsheet .wrapper .dice_pool-grid .dice-base select.input{
+    color: #404040;
+    border-color: #404040;
 }
 
 .charsheet .dice-base-header {
@@ -3369,12 +3374,12 @@ button.torches:hover::after {
   color: #fff;
   display: grid;
   grid-area: dice-skill;
-  grid-template-areas: "dice-skill-header dice-skill-header" "dice-skill-col1 dice-skill-col2" "dice-skill-col1 dice-skill-col2" "dice-skill-col1 dice-skill-col2" "dice-skill-col1 dice-skill-col2" "dice-skill-col1 dice-skill-col2" "dice-skill-col1 dice-skill-col2" "dice-skill-col1 dice-skill-col2";
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2.5em 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "dice-skill-header" "dice-skill-body";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1em 1fr;
   justify-items: center;
   margin: 2px 0 0 0;
-  padding: 2px 2px 0 2px;
+  padding: 2px;
   text-align: center;
 }
 
@@ -3400,12 +3405,12 @@ button.torches:hover::after {
   color: #fff;
   display: grid;
   grid-area: dice-gear;
-  grid-template-areas: "dice-gear-header dice-gear-header" "dice-gear-col1 dice-gear-col2" "dice-gear-col1 dice-gear-col2" "dice-gear-col1 dice-gear-col2" "dice-gear-col1 dice-gear-col2" "dice-gear-col1 dice-gear-col2" "dice-gear-col1 dice-gear-col2" "dice-gear-col1 dice-gear-col2";
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2.5em 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "dice-gear-header" "dice-gear-body";
+  grid-template-columns: 1fr;
+  grid-template-rows: 1em 1fr;
   justify-items: center;
   margin: 2px 0 0 0;
-  padding: 2px 2px 0 2px;
+  padding: 2px;
   text-align: center;
 }
 
@@ -3424,53 +3429,70 @@ button.torches:hover::after {
   font-weight: normal;
 }
 
-.charsheet .dice-gear-col2 {
+.charsheet .dice-pool-control {
+  align-self: center;
   display: flex;
-  flex-direction: column;
-  grid-area: dice-gear-col2;
+  grid-area: dice-base-body;
+  justify-content: center;
+  padding: 0.5em;
+  width: 100%;
 }
 
-.charsheet .dice-gear-col1 {
-  display: flex;
-  flex-direction: column;
-  grid-area: dice-gear-col1;
+.charsheet .dice-skill .dice-pool-control {
+  grid-area: dice-skill-body;
+}
+
+.charsheet .dice-gear .dice-pool-control {
+  grid-area: dice-gear-body;
+}
+
+.charsheet .dice-select {
+  font-size: 1.1em;
+  max-width: 7em;
+  text-align: center;
+  width: 100%;
 }
 
 .charsheet .dice-artifact {
-  align-items: self-end;
+  align-items: stretch;
   display: grid;
   grid-area: dice-artifact;
-  grid-template-rows: 2em 4em;
-  grid-template-areas: "dice-artifact-header dice-artifact-header dice-artifact-header dice-artifact-header"
-    "dice-artifact-rolls dice-artifact-rolls dice-artifact-rolls dice-artifact-rolls";
+  grid-template-rows: auto auto;
+  grid-template-areas: "dice-artifact-header dice-artifact-header dice-artifact-header"
+    "dice-artifact-rolls dice-artifact-rolls dice-artifact-rolls";
+  margin-top: 8px;
 }
 
 .charsheet .dice-artifact-header {
   grid-area: dice-artifact-header;
-  margin: 5px 0 0 0;
+  margin: 0;
   text-align: center;
 }
 
 .charsheet .dice-artifact-rolls {
-  border-top: 5px solid #000;
+  /* border-top: 2px solid #000; */
   display: grid;
   grid-area: dice-artifact-rolls;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding-top: 12px;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 8px 0 4px;
 }
 
-.charsheet .dice-artifact-rolls > span {
+.charsheet .dice-artifact-rolls > label {
   display: grid;
+  gap: 0.5em;
   place-content: center;
-  position: relative;
+  place-items: center;
 }
 
-.charsheet .dice-artifact-rolls > span > input,
-.charsheet .dice-artifact-rolls > span > span,
-.charsheet .dice-artifact-rolls > span span::before {
+.charsheet .dice-artifact-rolls > label > span,
+.charsheet .dice-artifact-rolls > label > span::before {
   margin: auto !important;
   place-self: center;
-  position: absolute;
+}
+
+.charsheet .dice-artifact-rolls > label > select {
+  margin-top: 0;
+  max-width: 5em;
 }
 
 .charsheet .dice-rolls {
@@ -5377,49 +5399,51 @@ span.willpower-box3 {
   font-size: 3em;
   left: 0;
   position: relative;
-  top: -14px;
+  top: 0px;
   z-index: 1;
+  margin-top: 2px !important;
 }
 
-.charsheet .wrapper span.artifact-die.epic {
+/* .charsheet .wrapper span.artifact-die.epic {
   height: 25px;
   right: -2px;
   top: 1px;
   transform: scale(.9, 1.1);
-}
+} */
 
 .charsheet input.dice-selection.epic ~ .artifact-die.epic::before {
   color: #0088af;
   content: "K";
   font-family: dicefontd10;
-  font-size: 3.5em;
-  left: -2px;
+  font-size: 3em;
+  left: 0px;
   position: relative;
-  top: -24px;
+  top: 0px;
   z-index: 1;
+  margin-top: 2px !important;
 }
 
-.charsheet .wrapper span.artifact-die.legendary {
+/* .charsheet .wrapper span.artifact-die.legendary {
   height: 32px;
   top: 2px;
   transform: scale(.95, .9);
-}
+} */
 
 .charsheet input.dice-selection.legendary ~ .artifact-die.legendary::before {
   color: #ff8c00;
   content: "L";
   font-family: dicefontd12;
-  font-size: 3.4em;
+  font-size: 3em;
   left: 0;
   position: relative;
-  top: -17px;
+  top: 0px;
   z-index: 1;
 }
 
 .charsheet .dice-artifact-rolls input.dice-selection + span::before {
   margin: 0;
   width: 36px;
-  height: 30px;
+  height: 27px;
   z-index: 0;
   position: relative;
 }
@@ -5428,7 +5452,7 @@ span.willpower-box3 {
 .charsheet span.artifact-die.mighty2,
 .charsheet span.artifact-die.epic,
 .charsheet span.artifact-die.legendary {
-  height: 28px;
+  height: 33px;
   position: relative;
   transform: none;
 }
